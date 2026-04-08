@@ -5,7 +5,7 @@
 **A general framework for multivariate time-series historical reconstruction.**
 
 
-<img src="docs/figures/methodology_workflow.png" alt="Two-phase progressive historical reconstruction methodology" width="100%">
+<img src="images/methodology_workflow.png" alt="Two-phase progressive historical reconstruction methodology" width="100%">
 
 <sub><i>Conceptual workflow re-rendered from Janbain et al. 2023 (<i>Water</i>, <a href="https://doi.org/10.3390/w15091773">doi:10.3390/w15091773</a> </i></sub>
 
