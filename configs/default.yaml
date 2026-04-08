@@ -1,0 +1,45 @@
+# Defaults — every other config inherits these conceptually.
+seed: 42
+output_dir: outputs/default
+
+data:
+  path: data/synthetic.csv
+  date_column: Dates
+  input_features: []
+  target_features: []
+  date_begin: null
+  date_end: null
+  interpolate_missing: true
+  train_split: 0.7
+  val_split: 0.8
+  scaler: minmax
+
+window:
+  look_back: 24
+  horizon: 1
+
+model:
+  name: bilstm        # lstm | bilstm | gru | bigru | cnn_bilstm
+  units: 64
+  num_layers: 2
+  dropout: 0.1
+  cnn_filters: 32
+  use_attention: false
+
+train:
+  epochs: 100
+  batch_size: 64
+  learning_rate: 0.001
+  early_stopping_patience: 15
+  optimizer: adam
+  loss: mse
+
+tune:
+  enabled: false
+  n_trials: 30
+  timeout: null
+  sampler: tpe
+  pruner: median
+  direction: minimize
+  study_name: deep_ts_imputer
+  storage: null

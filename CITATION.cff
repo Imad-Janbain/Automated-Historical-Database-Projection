@@ -1,0 +1,25 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite the accompanying paper."
+title: "deep-ts-imputer: deep-learning time-series imputation"
+authors:
+  - family-names: Janbain
+    given-names: Imad
+    orcid: "https://orcid.org/0000-0000-0000-0000"
+license: MIT
+preferred-citation:
+  type: article
+  authors:
+    - family-names: Janbain
+      given-names: Imad
+    - family-names: Jardani
+      given-names: Abderrahim
+    - family-names: Deloffre
+      given-names: Julien
+    - family-names: Massei
+      given-names: Nicolas
+  title: "Deep Learning Approaches for Numerical Modeling and Historical Reconstruction of Water Quality Parameters in Lower Seine"
+  journal: Water
+  volume: 15
+  issue: 9
+  year: 2023
+  doi: 10.3390/w15091773

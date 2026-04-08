@@ -1,0 +1,60 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "deep-ts-imputer"
+version = "0.1.0"
+description = "Deep-learning time-series imputation framework (LSTM/GRU/CNN-BiLSTM + Optuna)"
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.10"
+authors = [{ name = "Imad Janbain", email = "imad.janbain@hotmail.com" }]
+keywords = ["time-series", "imputation", "deep-learning", "lstm", "hydrology", "optuna"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+    "numpy>=1.24,<2.0",
+    "pandas>=2.0",
+    "scikit-learn>=1.3",
+    "pyyaml>=6.0",
+    "joblib>=1.3",
+    "matplotlib>=3.7",
+    "seaborn>=0.13",
+    "tensorflow>=2.13,<2.16",
+    "optuna>=3.4",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.4", "pytest-cov>=4.1", "ruff>=0.4", "mypy>=1.7", "jupyter>=1.0"]
+
+[project.scripts]
+dti-train = "deep_ts_imputer.cli:train_main"
+dti-tune = "deep_ts_imputer.cli:tune_main"
+dti-reconstruct = "deep_ts_imputer.cli:reconstruct_main"
+dti-analyze = "deep_ts_imputer.cli:analyze_main"
+dti-grid = "deep_ts_imputer.cli:grid_main"
+dti-progressive = "deep_ts_imputer.cli:progressive_main"
+
+[project.urls]
+Homepage = "https://github.com/imadjanbain/deep-ts-imputer"
+Issues = "https://github.com/imadjanbain/deep-ts-imputer/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "N", "UP", "B", "C4", "SIM"]
+ignore = ["E501"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

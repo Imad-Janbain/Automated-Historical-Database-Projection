@@ -1,0 +1,35 @@
+# Three named services so common workflows are one command:
+#   docker compose run --rm demo       # synthetic end-to-end smoke test
+#   docker compose run --rm trainer    # train on the Seine config
+#   docker compose run --rm tuner      # Optuna search
+services:
+  base: &base
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: deep-ts-imputer:latest
+    volumes:
+      - ../data:/app/data
+      - ../outputs:/app/outputs
+      - ../configs:/app/configs
+    working_dir: /app
+
+  demo:
+    <<: *base
+    command: >
+      bash -c "python scripts/generate_synthetic_demo.py --out data/synthetic.csv &&
+               python scripts/train.py --config configs/synthetic_demo.yaml"
+
+  trainer:
+    <<: *base
+    command: python scripts/train.py --config configs/seine_water_quality.yaml
+
+  tuner:
+    <<: *base
+    command: python scripts/tune.py --config configs/seine_water_quality.yaml
+
+  shell:
+    <<: *base
+    command: bash
+    stdin_open: true
+    tty: true

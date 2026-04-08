@@ -1,0 +1,34 @@
+# Smallest end-to-end run that proves the repo works on a fresh clone.
+seed: 42
+output_dir: outputs/synthetic_demo
+
+data:
+  path: data/synthetic.csv
+  date_column: Dates
+  input_features:
+    - water_level_upstream
+    - water_level_downstream
+  target_features:
+    - conductivity
+    - dissolved_oxygen
+    - turbidity
+  interpolate_missing: true
+  train_split: 0.7
+  val_split: 0.8
+  scaler: minmax
+
+window:
+  look_back: 24
+  horizon: 1
+
+model:
+  name: bilstm
+  units: 32
+  num_layers: 1
+  dropout: 0.1
+
+train:
+  epochs: 10
+  batch_size: 128
+  learning_rate: 0.001
+  early_stopping_patience: 5

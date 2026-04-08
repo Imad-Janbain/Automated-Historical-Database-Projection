@@ -1,0 +1,31 @@
+# Phase 1 grid spec — reproduces (a small slice of) the Seine paper sweep.
+# Each (target × input_combination × model) triple yields one trained model
+# stored under `artifacts_dir`, and one row in `db_path`.
+base_config: configs/seine_water_quality.yaml
+db_path: outputs/seine_grid/results.csv
+artifacts_dir: outputs/seine_grid/artifacts
+
+targets:
+  - { name: Conductivity_Tancarville_Surface,    station: Tancarville }
+  - { name: Conductivity_Fatouville_Surface,     station: Fatouville }
+  - { name: Conductivity_Rouen_Surface,          station: Rouen }
+  - { name: Dissolved_Oxygen_Tancarville_Surface, station: Tancarville }
+  - { name: Dissolved_Oxygen_Fatouville_Surface,  station: Fatouville }
+  - { name: Dissolved_Oxygen_Rouen_Surface,       station: Rouen }
+  - { name: Turbidity_Tancarville_Bottom,         station: Tancarville }
+
+# Input combinations follow the paper: nearest station only, neighbour pairs,
+# all water levels, and water levels + previously-reconstructed quality vars
+# (those last ones can be added in a second sweep after Phase 2 step 1).
+input_combinations:
+  - [Water_level_Tancarville]
+  - [Water_level_Honfleur, Water_level_Tancarville]
+  - [Water_level_Tancarville, Water_level_Caudebec]
+  - [Water_level_Honfleur, Water_level_Tancarville, Water_level_Caudebec]
+  - [Water_level_Honfleur, Water_level_Tancarville, Water_level_Caudebec, Water_level_Duclair, Water_level_Rouen]
+
+models:
+  - { name: bilstm,     units: 64, num_layers: 2, dropout: 0.1 }
+  - { name: gru,        units: 64, num_layers: 2, dropout: 0.1 }
+  - { name: cnn_bilstm, units: 64, num_layers: 2, dropout: 0.2, cnn_filters: 32, use_attention: false }
+  - { name: cnn_bilstm, units: 64, num_layers: 2, dropout: 0.2, cnn_filters: 32, use_attention: true }

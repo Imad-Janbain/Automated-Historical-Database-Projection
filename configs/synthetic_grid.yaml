@@ -1,0 +1,18 @@
+# Tiny grid spec used by the test/demo so the full Phase 1 + Phase 2
+# workflow runs end-to-end on the synthetic dataset in under a minute.
+base_config: configs/synthetic_demo.yaml
+db_path: outputs/synthetic_grid/results.csv
+artifacts_dir: outputs/synthetic_grid/artifacts
+
+targets:
+  - { name: conductivity,     station: virtual_estuary }
+  - { name: dissolved_oxygen, station: virtual_estuary }
+  - { name: turbidity,        station: virtual_estuary }
+
+input_combinations:
+  - [water_level_upstream]
+  - [water_level_upstream, water_level_downstream]
+
+models:
+  - { name: bilstm, units: 16, num_layers: 1, dropout: 0.1 }
+  - { name: gru,    units: 16, num_layers: 1, dropout: 0.1 }

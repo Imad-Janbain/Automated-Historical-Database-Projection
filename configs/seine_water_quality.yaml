@@ -1,0 +1,74 @@
+# Reproduction config for Janbain et al. (Water/MDPI 2023).
+# Replace `data.path` with your local copy of the Seine dataset.
+seed: 42
+output_dir: outputs/seine_water_quality
+
+data:
+  path: data/seine_hourly.csv
+  date_column: Dates
+  input_features:
+    - Water_level_Honfleur
+    - Water_level_Tancarville
+    - Water_level_Caudebec
+    - Water_level_Duclair
+    - Water_level_Rouen
+  target_features:
+    - Conductivity_Tancarville_Surface
+    - Dissolved_Oxygen_Tancarville_Surface
+    - Turbidity_Tancarville_Bottom
+  date_begin: "2015-06-01"
+  date_end: "2022-06-01"
+  interpolate_missing: true
+  train_split: 0.7
+  val_split: 0.8
+  scaler: minmax
+  # Units are used in plot labels and metrics reports. They are NOT used
+  # by the model itself — scaling is unit-agnostic — but they are
+  # essential for downstream interpretation.
+  units:
+    Water_level_Honfleur: "m"
+    Water_level_Tancarville: "m"
+    Water_level_Caudebec: "m"
+    Water_level_Duclair: "m"
+    Water_level_Rouen: "m"
+    Conductivity_Tancarville_Surface: "μS·cm⁻¹"
+    Dissolved_Oxygen_Tancarville_Surface: "mg·L⁻¹"
+    Turbidity_Tancarville_Bottom: "NTU"
+  # Column aliases let configs refer to clean identifiers even when the
+  # source CSV embeds units in the column header (the original Seine
+  # archive does this). Format: <raw_csv_column>: <clean_identifier>.
+  column_aliases:
+    "Water_level_Honfleur (m)": "Water_level_Honfleur"
+    "Water_level_Tancarville (m)": "Water_level_Tancarville"
+    "Water_level_Caudebec (m)": "Water_level_Caudebec"
+    "Water_level_Duclair (m)": "Water_level_Duclair"
+    "Water_level_Rouen (m)": "Water_level_Rouen"
+    "Conductivity_Tancarville_Surface (μS·cm–1)": "Conductivity_Tancarville_Surface"
+    "Dissolved_Oxygen_Tancarville_Surface (mg.l–1)": "Dissolved_Oxygen_Tancarville_Surface"
+    "Turbidity_Tancarville_Bottom (NTU)": "Turbidity_Tancarville_Bottom"
+
+window:
+  look_back: 48
+  horizon: 1
+
+model:
+  name: cnn_bilstm
+  units: 64
+  num_layers: 2
+  dropout: 0.2
+  cnn_filters: 32
+  use_attention: true
+
+train:
+  epochs: 150
+  batch_size: 128
+  learning_rate: 0.001
+  early_stopping_patience: 20
+
+tune:
+  enabled: true
+  n_trials: 50
+  sampler: tpe
+  pruner: median
+  study_name: seine_wq
+  storage: sqlite:///outputs/seine_water_quality/optuna.db
