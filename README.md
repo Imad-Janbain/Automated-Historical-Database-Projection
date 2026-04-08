@@ -16,11 +16,9 @@ LSTM · BiLSTM · GRU · CNN-BiLSTM (+ attention) · Optuna · Keras · Docker
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Code style: ruff](https://img.shields.io/badge/code%20style-ruff-261230.svg)](https://github.com/astral-sh/ruff)
 
-
+<sub><i>Conceptual workflow re-rendered from Imad Janbain et al. 2023 (<i>Water</i>, <a href="https://doi.org/10.3390/w15091773">doi:10.3390/w15091773</a> </i></sub>
 
 <img src="images/methodology_workflow.png" alt="Two-phase progressive historical reconstruction methodology" width="100%">
-
-<sub><i>Conceptual workflow re-rendered from Janbain et al. 2023 (<i>Water</i>, <a href="https://doi.org/10.3390/w15091773">doi:10.3390/w15091773</a> </i></sub>
 
 </div>
 ---
