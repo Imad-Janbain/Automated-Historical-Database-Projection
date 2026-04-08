@@ -18,7 +18,7 @@ LSTM · BiLSTM · GRU · CNN-BiLSTM (+ attention) · Optuna · Keras · Docker
 
 <sub><i>Conceptual workflow re-rendered from Imad Janbain et al. 2023 (<i>Water</i>, <a href="https://doi.org/10.3390/w15091773">doi:10.3390/w15091773</a> </i></sub>
 
-<img src="images/methodology_workflow.png" alt="Two-phase progressive historical reconstruction methodology" width="100%">
+<img src="images/methodology_workflow.png" alt="Historical reconstruction methodology" width="100%">
 
 </div>
 ---
