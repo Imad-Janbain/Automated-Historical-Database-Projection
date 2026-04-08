@@ -4,7 +4,11 @@
 
 **A general framework for multivariate time-series historical reconstruction.**
 
-Train deep models on the modern window where every variable exists,
+<p align="center">
+  <img src="images/images/methodology_workflow.png" alt="General framework" width="80%">
+</p>
+
+Train deep learning models on the modern window where every variable exists,
 then progressively reconstruct the long historical window where some
 channels are missing — automatically picking the best feasible model at
 each step.
