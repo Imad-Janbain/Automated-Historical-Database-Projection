@@ -642,5 +642,5 @@ MIT — see [LICENSE](LICENSE).
 
 ## Author
 
-**Imad Janbain** — Applied Machine Learning Scientist
+**Imad Janbain** — Applied Machine Learning Research Scientist
 [LinkedIn](https://www.linkedin.com/in/imad-janbain-885948225/) · imad.janbain@hotmail.com
